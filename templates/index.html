@@ -1,0 +1,43 @@
+<h1>PF GUI</h1>
+
+	{% if status.running %}
+		pf is active since {{ status.since | format_time }}
+		<a href="/disable">disable</a>
+	{% else %}
+		pf is inactive {{ status.since | format_time }}
+		<a href="/enable">enable</a>
+	{% endif %}
+
+<h3>General Statistics</h3>
+
+	<dt>State table entries</dt>
+		<dd>{{status.states}}</dd>
+
+	<dt>HostID</dt>
+		<dd>{{status.hostid}}</dd>
+
+	<dt>Source entries</dt>
+		<dd>{{status.src_nodes}}</dd>
+
+	<dt>Statistics interface</dt>
+		<dd>{{status.ifname}}</dd>
+
+	<dt>Traffic v4</dt>
+		<dd> {{ status.bytes["in"][0] | mbyte }} mbyte in / {{ status.bytes["out"][0] | mbyte }} mbyte out </dd>
+	
+	<dt>Traffic v6</dt>
+		<dd> {{ status.bytes["in"][1] | mbyte }} mbyte in / {{ status.bytes["out"][1] | mbyte }} mbyte out </dd>
+
+<h3>Tables:</h3>
+	<ul id="tables">
+		{% for item in tables %}
+		    <li><a href="/tables/{{ item.name }}">{{ item.name }}</a></li>
+		{% endfor %}
+	</ul>
+
+<h3>Rules:</h3>
+	<ul id="rules">
+		{% for rule in rules.rules %}
+		    <li>{{ rule }} <a href="/rules/delete/{{ rule.nr }}"> delete </a> </li>
+		{% endfor %}
+	</ul>

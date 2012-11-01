@@ -1,0 +1,27 @@
+<h3>Addresses in table {{name}}</h3>
+<ul id="addrs">
+{% for addr in addrs %}
+    <li>{{ addr }}</li>
+{% endfor %}
+</ul>
+
+<h4>Statistics</h4>
+{% set stat =  stats[0] %}
+<h5>In</h5>
+Blocked: {{ stat.bytes["in"][0] | mbyte }} mbyte<br />
+Pass: {{ stat.bytes["in"][1] | mbyte }} mbyte<br />
+XPass: {{ stat.bytes["in"][2] | mbyte }} mbyte
+<h5>Out</h5>
+Blocked: {{ stat.bytes["out"][0] | mbyte }} mbyte<br />
+Pass: {{ stat.bytes["out"][1] | mbyte }} mbyte<br />
+XPass: {{ stat.bytes["out"][2] | mbyte }} mbyte
+<br /> <br/>
+Last cleared: {{ stat.cleared | format_time }}
+<a href="/tables/clear_stats/{{name}}">Clear stats</a>
+<form method="POST" action="/tables/add/{{name}}">
+	<h4>Add address</h4>
+	<input type="text" name="address">
+	<input type="submit">
+</form>
+
+<a href="/">Back </a>

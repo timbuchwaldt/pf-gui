@@ -19,3 +19,10 @@ Use py-pf from the [github repository](https://github.com/dotpy/py-pf), thats th
 You can install flask via pip:
 
 	# pip install flask
+
+
+## Screenshots
+
+![first screenshot](http://cl.ly/KbgW/Screen%20Shot%202012-11-01%20at%208.43.31%20PM.png)
+
+First screenshot of the styled version - except many improvements to come

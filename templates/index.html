@@ -36,9 +36,9 @@
 	</ul>
 
 <h3>Rules:</h3>
-	<ul id="rules">
+	<pre id="rules">
 		{% for rule in rules.rules %}
-		    <li>{{ rule }} <a href="/rules/delete/{{ rule.nr }}"> delete </a> </li>
+		{{ rule }} <a href="/rules/delete/{{ rule.nr }}">delete</a>
 		{% endfor %}
-	</ul>
+	</pre>
 {% endblock %}

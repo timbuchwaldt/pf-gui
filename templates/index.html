@@ -1,3 +1,5 @@
+{% extends "layout.html" %}
+{% block body %}
 <h1>PF GUI</h1>
 
 	{% if status.running %}
@@ -41,3 +43,4 @@
 		    <li>{{ rule }} <a href="/rules/delete/{{ rule.nr }}"> delete </a> </li>
 		{% endfor %}
 	</ul>
+{% endblock %}

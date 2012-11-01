@@ -1,7 +1,5 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>PF GUI</h1>
-
 	{% if status.running %}
 		pf is active since {{ status.since | format_time }}
 		<a href="/disable">disable</a>

@@ -1,6 +1,6 @@
 import pf
 import time
-from flask import Flask, render_template, redirect, url_for, request
+from flask import *
 
 app = Flask(__name__)
 filter = pf.PacketFilter()
@@ -18,12 +18,14 @@ def index():
 @app.route("/disable")
 def disable():
     filter.disable()
+    flash("pf disabled")
     return redirect(url_for('index'))
 
 
 @app.route("/enable")
 def enable():
     filter.enable()
+    flash("pf enabled")
     return redirect(url_for('index'))
 
 
@@ -32,6 +34,7 @@ def delete_rule(id):
     new_rs = filter.get_ruleset()
     new_rs.remove(int(id))
     filter.load_ruleset(new_rs, '')
+    flash("rule deleted")
     return redirect(url_for('index'))
 
 
@@ -45,12 +48,14 @@ def tables(name):
 @app.route('/tables/add/<name>', methods=['POST'])
 def add_address_to_table(name):
     filter.add_addrs(name, request.form['address'])
+    flash("Addres " + request.form['address'] + " added ")
     return redirect(url_for('tables', name=name))
 
 
 @app.route('/tables/clear_stats/<name>')
 def clear_stats(name):
     filter.clear_tstats(pf.PFTable(name))
+    flash("Stats cleared")
     return redirect(url_for('tables', name=name))
 
 
@@ -66,4 +71,5 @@ def mbyte(bytes):
 
 if __name__ == "__main__":
     app.debug = True
+    app.secret_key = 'some_secret'
     app.run(host='0.0.0.0')
